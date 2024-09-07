@@ -1,0 +1,6 @@
+/.env
+/.idea
+# Python cache files
+*.pyc
+*.pyo
+__pycache__/
