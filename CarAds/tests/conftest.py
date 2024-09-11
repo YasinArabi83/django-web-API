@@ -47,6 +47,22 @@ def user_token(user_factory):
         'refresh_token': str(refresh)
     }
 
+
+@pytest.fixture
+def car_ads_data():
+    return {
+        'code': '5678',
+        'title': 'New Car',
+        'year': 2021,
+        'mileage': 12000,
+        'location': 'Tehran',
+        'body_color': 'Blue',
+        'body_type': 'Crossover',
+        'transmission': 'Manual',
+        'price': 10000000
+    }
+
+
 @pytest.fixture
 def api_client():
     return APIClient()
