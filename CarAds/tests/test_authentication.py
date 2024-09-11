@@ -22,3 +22,16 @@ def test_login_view(api_client, user_factory):
     }
     response = api_client.post(reverse('login'), data)
     assert response.status_code == 200
+
+
+@pytest.mark.django_db
+def test_change_password_view(api_client, user_factory):
+    user = user_factory(email='test@example.com', password='old_password')
+    api_client.force_authenticate(user=user)
+
+    data = {
+        'old_password': 'old_password',
+        'new_password': 'new_password123'
+    }
+    response = api_client.post(reverse('change-password'), data)
+    assert response.status_code == 200
