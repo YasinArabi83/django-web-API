@@ -32,3 +32,27 @@ def test_car_ads_list_authenticated(api_client, user_token, car_ads_data, car_ad
     response = api_client.get(reverse('carads-list'))
     assert response.status_code == 200
     assert len(response.data['results']) == 1
+
+
+@pytest.mark.django_db
+def test_change_password_unauthenticated(api_client):
+
+    data = {
+        'old_password': 'password123',
+        'new_password': 'newpassword123'
+    }
+    response = api_client.post(reverse('change-password'), data)
+    assert response.status_code == 401  # Unauthorized
+
+
+@pytest.mark.django_db
+def test_change_password_authenticated(api_client, user_token):
+
+    api_client.credentials(HTTP_AUTHORIZATION='Bearer ' + user_token['access_token'])
+    data = {
+        'old_password': 'password123',
+        'new_password': 'newpassword123'
+    }
+    response = api_client.post(reverse('change-password'), data)
+    assert response.status_code == 200
+    assert response.data['detail'] == 'Password updated successfully.'
