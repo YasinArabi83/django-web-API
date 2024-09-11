@@ -1,17 +1,17 @@
 # Django Web API
-***
+
 This project is a Django-based API that allows users to manage car advertisements, user authentication, and other operations using JWT for secure authentication.
-***
+
 ## Features
-***
+
 - User Signup, Login (using JWT), and Change Password
 - List, filter, and paginate car ads
 - JWT Authentication for secure user login
 - Custom user model with email as the unique identifier
 - Filtering car ads based on body type (SUV, Crossover, etc.)
-***
+
 ## Installation
-***
+
 ### Prerequisites
 
 Ensure you have the following installed:
@@ -22,7 +22,7 @@ Ensure you have the following installed:
 - Virtual environment package (optional but recommended)
 
 ### Steps
-***
+
 1. Clone the repository:
 
    ```bash
@@ -57,12 +57,12 @@ Ensure you have the following installed:
    python manage.py runserver
 9. Navigate to `http://localhost:8000/admin` and log in using your superuser credentials to access the admin panel.
 
-***
+
 ## Endpoints
-***
+
 
 ### Authentication
-***
+
 - Sign up: `api/signup/` (POST)
   - Request Body:
   ```JSON
@@ -90,18 +90,17 @@ Ensure you have the following installed:
   }
 - Token Refresh: /token/refresh/ (POST)
 
-***
+
 
 ## Car Ads
-***
+
 - List All Ads: `api/car/` (GET)
 - Filter by Body Type: `api/car/type/<body_type>/` (GET)
   - Example: /car/type/suv/
 - Pagination: The car ads list is paginated with 20 items per page by default. You can navigate using next and previous links in the response.
 
-***
+
 ## Built With
-***
 - Django - The high-level Python Web framework used.
 - Django Rest Framework (DRF) - Used for building the API.
 - PostgreSQL - The database used for data persistence.
