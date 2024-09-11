@@ -1,6 +1,7 @@
 import pytest
 
 from CarAds.models import User, CarAds
+from rest_framework.test import APIClient
 
 
 @pytest.fixture
@@ -35,3 +36,6 @@ def user_factory(db):
     return create_user
 
 
+@pytest.fixture
+def api_client():
+    return APIClient()
