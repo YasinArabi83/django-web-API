@@ -1,4 +1,5 @@
 import pytest
+from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
 
 from CarAds.models import User, CarAds
 from rest_framework.test import APIClient
@@ -35,6 +36,16 @@ def user_factory(db):
 
     return create_user
 
+
+@pytest.fixture
+def user_token(user_factory):
+    user = user_factory(email='user@example.com', password='password123')
+    access_token = AccessToken.for_user(user)
+    refresh = RefreshToken.for_user(user)
+    return {
+        'access_token': str(access_token),
+        'refresh_token': str(refresh)
+    }
 
 @pytest.fixture
 def api_client():
