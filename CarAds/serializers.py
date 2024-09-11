@@ -33,3 +33,20 @@ class UserSerializer(serializers.ModelSerializer):
         user.set_password(password)  # Set the user's password
         user.save()
         return user
+
+
+class ChangePasswordSerializer(serializers.Serializer):
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
+
+    def validate_old_password(self, value):
+        user = self.context['request'].user
+        if not user.check_password(value):
+            raise serializers.ValidationError("Old password is incorrect.")
+        return value
+
+    def validate(self, data):
+        user = self.context['request'].user
+        if user.check_password(data['new_password']):
+            raise serializers.ValidationError("New password cannot be the same as the old password.")
+        return data
